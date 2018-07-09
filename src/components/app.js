@@ -1,9 +1,8 @@
 import { LitElement, html } from '@polymer/lit-element';
-import { repeat } from 'lit-html/lib/repeat.js';
 import './add-item';
 import './list-items';
 
-class MyApp extends LitElement {
+class TodoApp extends LitElement {
 
   static get properties() {
     return {
@@ -13,7 +12,6 @@ class MyApp extends LitElement {
 
   constructor() {
     super();
-
     this.todoList = {
       list: JSON.parse(window.localStorage.getItem('todo-list')) === null ? '' : JSON.parse(window.localStorage.getItem('todo-list')),
     }
@@ -40,7 +38,6 @@ class MyApp extends LitElement {
       <list-items todoList="${this.todoList.list}"></list-items>
     `;
   }
-
 }
 
-customElements.define('my-app', MyApp);
+customElements.define('todo-app', TodoApp);

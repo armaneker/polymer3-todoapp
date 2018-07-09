@@ -1,11 +1,10 @@
 import { LitElement, html } from '@polymer/lit-element';
-import './todo-item';
 
 class AddItem extends LitElement {
 
   static get properties() {
     return {
-      todoList: Array,
+      todoList: Array, //todoList
       _todoItemToday: String,
       _todoItemTomorrow: String
     }
