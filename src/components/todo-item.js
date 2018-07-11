@@ -21,9 +21,8 @@ class TodoItem extends LitElement {
         <div class="list-item">
             <div class="check"><i class="far fa-square"></i></div>
             <div class="item">${todoItem !== undefined ? todoItem.item : ''}</div>
-            <div class="delete"><i class="fas fa-times"></i></div>
+            <button class="delete" on-click="${() => this._onRemove(todoItem.id)}}"><i class="fas fa-times"></i></button>
         </div>
-        <button on-click="${() => this._onRemove(todoItem.id)}}">x</button>
     `;
     }
 }

@@ -43,8 +43,7 @@ class TodoApp extends LitElement {
 
   _render({ todoList, time }) {
     return html`
-      <h1>To Do App</h1>
-      <add-item></add-item><br><br>
+      <add-item></add-item>
       <list-items todoList="${this.todoList.list}" time="${this.time}"></list-items>
     `;
   }

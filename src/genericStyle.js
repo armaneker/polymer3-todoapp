@@ -3,13 +3,13 @@ import { html } from '@polymer/lit-element';
 export const genericStyle = html`
 
 <style>
-
+@import url("https://use.fontawesome.com/releases/v5.1.0/css/all.css");
 html {
     position: relative;
     background: #004BC8;
     height:100%;
-    font-size:14px;
-    font-family:"San Francisco Display";
+    font-size:15px;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
     letter-spacing: -0.02px;
 }
 body {
@@ -31,6 +31,10 @@ body {
     font-weight: 700;
     font-size: 0.875rem;
     text-transform: uppercase;
+    position:fixed;
+    width:400px;
+    left:0;
+    bottom:0;
 }
 .footer a {
     color:rgba(255,255,255,0.5);
@@ -147,6 +151,8 @@ body {
     padding:0;
     margin:0;
     line-height: 1;
+    letter-spacing:3px;
+    text-transform:uppercase;
 }
 .d-flex {
     display:flex;
@@ -260,9 +266,16 @@ body {
     border-radius:0 0.5rem 0.5rem 0;
     color:rgba(0,0,0,0.25);
     transition: 100ms all linear;
+    border:none;
+    background:transparent;
+    cursor:pointer;
+    -webkit-appearance:button
 }
 .list-item .delete:hover {
     color:red;
+}
+.list-item .delete:focus {
+    outline:none;
 }
 .lists {
     padding-left:350px;
@@ -307,6 +320,29 @@ body {
   100% {
     transform: rotateZ(60deg) translate(1em, -22em);
   }
+}
+@media (max-width: 640px) {
+    html {
+        font-size:13px;
+    }
+    .add {
+        position: relative;
+        width:auto;
+    }
+    .add .header {
+        padding:1rem;
+    }
+    .lists {
+        padding-left:0;
+    }
+    .list .title {
+        margin:1rem;
+    }
+    .footer {
+        width:auto;
+        right:0;
+        background:#004BC8
+    }
 }
 </style>
 `;
