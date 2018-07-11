@@ -83,12 +83,6 @@ class AddItem extends LitElement {
 					<div class="text-counter">0/300</div>
 				</div>
 				<div class="error">😢 <small>Please write anything</small></div>
-				<div class="footer">
-					Made with ♥ and <a class="link" href="#">polymer</a>
-					<br>by
-					<a href="#">@arman_eker</a>
-					and <a href="#">@firatgursu</a> in ist.
-				</div>
 			</div>
 		</div>
     `;
