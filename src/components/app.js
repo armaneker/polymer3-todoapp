@@ -6,7 +6,8 @@ class TodoApp extends LitElement {
 
   static get properties() {
     return {
-      todoList: Object
+      todoList: Object,
+      time: Number
     }
   }
 
@@ -15,9 +16,18 @@ class TodoApp extends LitElement {
     this.todoList = {
       list: JSON.parse(window.localStorage.getItem('todo-list')) === null ? '' : JSON.parse(window.localStorage.getItem('todo-list')),
     }
+    this.time = 1;
   }
 
-  _firstRendered() {
+  _firstRendered() { 
+    this.addEventListener('todoListTimeChanged', (e) => {
+      this.time = this.time === 1 ? 3 : 4;
+      this.requestRender();
+      setTimeout(() => {
+        this.time = e.detail.time;
+        this.requestRender();
+      },200);
+    });
     this.addEventListener('todoListChanged', (e) => {
       this.todoList.list = e.detail.todoList;
       this.requestRender();
@@ -31,11 +41,11 @@ class TodoApp extends LitElement {
     });
   }
 
-  _render({ todoList }) {
+  _render({ todoList, time }) {
     return html`
       <h1>To Do App</h1>
       <add-item></add-item><br><br>
-      <list-items todoList="${this.todoList.list}"></list-items>
+      <list-items todoList="${this.todoList.list}" time="${this.time}"></list-items>
     `;
   }
 }
