@@ -32,7 +32,20 @@ class TodoApp extends LitElement {
       this.todoList.list = e.detail.todoList;
       this.requestRender();
     });
+    this.addEventListener('todoItemDoneChange', (e) => {
+      console.log('todoItemDoneChange');
+      let index = this.todoList.list.map(function(item) {return item.id}).indexOf(e.detail.item);
+      let list = _.clone(this.todoList.list);
+      let item = Object.assign({}, list[index]);
+      item.done = !item.done;
+      list[index] = item;
+      this.todoList = {
+        list: list
+      };
+      window.localStorage.setItem('todo-list', JSON.stringify(this.todoList.list));
+    });
     this.addEventListener('todoListRemove', (e) => {
+      console.log('todoListRemove');
       let index = this.todoList.list.map(function (item) { return item.id }).indexOf(e.detail.item);
       this.todoList.list.splice(index, 1);
       this.todoList.list = _.clone(this.todoList.list);

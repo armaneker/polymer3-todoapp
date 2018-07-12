@@ -15,7 +15,6 @@ class ListItems extends LitElement {
     }
 
     checkToday() {
-        console.log('Today: ' + this.time);
         if(this.time === 1) {
             return 'active';
         } else if (this.time === 3) {
@@ -28,7 +27,6 @@ class ListItems extends LitElement {
     }
 
     checkLater() {
-        console.log('Later: ' + this.time);
         if(this.time === 2) {
             return 'active';
         } else if (this.time === 4) {
