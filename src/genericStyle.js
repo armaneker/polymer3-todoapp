@@ -32,9 +32,10 @@ body {
     font-size: 0.875rem;
     text-transform: uppercase;
     position:fixed;
-    width:400px;
-    left:0;
-    bottom:0;
+    width:350px;
+    left:2rem;
+    bottom:2rem;
+    padding:1rem;
 }
 .footer a {
     color:rgba(255,255,255,0.5);
@@ -45,15 +46,16 @@ body {
 }
 .add {
     position: fixed;
-    left:0;
-    top:0;
-    bottom:0;
-    background:#0064FF;
+    left: 2 rem;
+    top: 2 rem;
+    bottom: 2 rem;
+    background: #0064FF;
     width:350px;
     padding:1.5rem;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
+    border-radius:1rem;
 }
 .add textarea {
     border:none;
@@ -321,27 +323,58 @@ body {
     transform: rotateZ(60deg) translate(1em, -22em);
   }
 }
-@media (max-width: 640px) {
+/** Portrait Mobile **/
+
+@media (max-width: 576px) and (orientation:portrait) {
     html {
-        font-size:13px;
+        font-size: 14px;
+    }
+    .footer {
+        width: auto;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        background: #004BC8;
+        padding: 1rem;
     }
     .add {
         position: relative;
-        width:auto;
+        width: auto;
+        left: auto;
+        right: auto;
+        top: auto;
+        bottom: auto;
+        border-radius: 0;
     }
     .add .header {
-        padding:1rem;
+        padding: 0 1rem 0.5rem 1rem;
+    }
+    .add .header h1 {
+        font-size: 1.5rem;
     }
     .lists {
-        padding-left:0;
+        padding: 0 1rem;
+        margin-bottom: 5rem;
     }
     .list .title {
-        margin:1rem;
+        margin: 1.5rem 1rem;
+        font-size: 1.5rem;
+    }
+}
+
+
+/** Landscape view mobile & tablets **/
+
+@media (max-width: 992px) and (orientation:landscape) {
+    .add {
+        border-radius: 0;
+        left: 0;
+        bottom: 0;
+        top: 0;
     }
     .footer {
-        width:auto;
-        right:0;
-        background:#004BC8
+        left: 0;
+        bottom: 0;
     }
 }
 </style>
