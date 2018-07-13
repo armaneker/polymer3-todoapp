@@ -82,6 +82,12 @@ class ListItems extends LitElement {
                 margin:0 0.5rem;
                 padding:0;
             }
+            .empty-state {
+                color:#fff; text-align:center; margin:0 auto; padding:1rem
+            }
+            .empty-state img {
+                width:100%;max-width:120px; margin:0 auto
+            }
             @media (max-width: 576px) and (orientation:portrait) {
                 .lists {
                     padding:0 1rem;
@@ -101,6 +107,11 @@ class ListItems extends LitElement {
 					<todo-item todoItem=${item}></todo-item>
                     `:'')}
 				</div>
+                <div class="empty-state">
+                    <img title="Clipboard Strategy by Chameleon Design from the Noun Project" src="strategy.svg">
+                    <h2>Make a Plan.</h2>
+                    <p>You didn't add any task yet.<br>Add some task and make your plan.</p>
+                </div>
 			</div>
 			<div class$="next list ${this.checkLater()}">
 				<h2 class="title">Later List</h2>
@@ -109,6 +120,11 @@ class ListItems extends LitElement {
                     <todo-item todoItem=${item}></todo-item>
                     `:'')}
 				</div>
+                <div class="empty-state">
+                    <img title="Clipboard Strategy by Chameleon Design from the Noun Project" src="strategy.svg">
+                    <h2>Make a Plan.</h2>
+                    <p>You didn't add any task yet.<br>Add some task and make your plan.</p>
+                </div>
 			</div>
 		</div>`;
     }
