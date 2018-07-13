@@ -39,7 +39,7 @@ class TodoApp extends LitElement {
       item.done = !item.done;
       list[index] = item;
       this.todoList = list;
-      this.todoList = _.sortBy(this.todoList, ['done', 'id']);
+      //this.todoList = _.sortBy(this.todoList, ['done', 'id']);
       window.localStorage.setItem('todo-list', JSON.stringify(this.todoList));
     });
     this.addEventListener('removeItem', (e) => {

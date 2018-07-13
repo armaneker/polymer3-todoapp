@@ -105,9 +105,9 @@ class TodoItem extends LitElement {
                 }
             }
         </style>
-        <div class$="list-item ${todoItem.done ? 'done' : ''}">
+        <div class$="list-item ${todoItem !== undefined && todoItem.done ? 'done' : ''}">
             <div on-click="${() => this._onDone(todoItem.id)}}" class="check-action">
-                <div class="check"><i class$="far ${todoItem.done ? 'fa-check-square' : 'fa-square'}"></i></div>
+                <div class="check"><i class$="far ${todoItem !== undefined && todoItem.done ? 'fa-check-square' : 'fa-square'}"></i></div>
                 <div class="item">${todoItem !== undefined ? todoItem.item : ''}</div>
             </div>
             <button class="delete" on-click="${() => this._onRemove(todoItem.id)}}"><i class="fas fa-times"></i></button>
