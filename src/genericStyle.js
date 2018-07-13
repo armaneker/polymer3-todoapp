@@ -10,6 +10,9 @@ export const sharedStyle = html`
     align-items: center;
     margin-top:1rem;
 }
+* {
+    transition: 120ms all ease-in-out;
+}
 
 </style>
 `;

@@ -62,6 +62,7 @@ class TodoItem extends LitElement {
             }
             .list-item .check-action {
                 display:flex;
+                width:100%;
             }
             .list-item .delete {
                 padding:0.625rem 1rem;
@@ -72,6 +73,7 @@ class TodoItem extends LitElement {
                 background:transparent;
                 cursor:pointer;
                 -webkit-appearance:button;
+                margin-left:auto;
                 opacity:0;
                 pointer-events: none;
             }

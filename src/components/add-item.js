@@ -61,9 +61,9 @@ class AddItem extends LitElement {
     <style>
       .add {
           position: fixed;
-          left: 2 rem;
-          top: 2 rem;
-          bottom: 2 rem;
+          left: 2rem;
+          top: 2rem;
+          bottom: 2rem;
           background: #0064FF;
           width:350px;
           padding:1.5rem;
