@@ -14,6 +14,7 @@ class AddItem extends LitElement {
   constructor() {
     super();
     this.time = 1;
+    this.todoItem = '';
   }
 
   _inputKeypress(e, time) {
@@ -21,7 +22,11 @@ class AddItem extends LitElement {
       this._onAddItem();
       e.preventDefault();
     } else {
-      this.todoItem = e.target.value;
+      if(this.todoItem.length < 141) {
+        this.todoItem = e.target.value;
+      } else {
+        this.todoItem = this.todoItem;
+      }
     }
   }
 
@@ -36,7 +41,7 @@ class AddItem extends LitElement {
         id: new Date().valueOf(),
         item: this.todoItem,
         done: false,
-        time: this.time 
+        time: this.time
       });
       this.dispatchEvent(new CustomEvent('addItem', { bubbles: true, composed: true, detail: { todoList: storedTodoList } }));
       this._clearInput();
@@ -112,6 +117,9 @@ class AddItem extends LitElement {
       .add .btn-enter:hover {
           background:#0064FF;
           color:#fff;
+      }
+      add .btn-enter:focus, .add .btn-enter:active {
+        display:block;
       }
       .add .text-counter {
           font-size:0.75rem;
@@ -238,22 +246,22 @@ class AddItem extends LitElement {
 					<h1>The Doday 🎯</h1>
 				</div>
 				<div class="d-flex">
-					<button class$="btn-tab ${this.time === 1 ? 'active':''}" on-click="${() => { 
-            this.time = 1 
-            this.dispatchEvent(new CustomEvent('todoListTimeChanged', { bubbles: true, composed: true, detail: { time: this.time } }));
-            }}">Today</button>
-					<button class$="btn-tab ${this.time === 2 ? 'active':''}" on-click="${() => { 
-            this.time = 2
-            this.dispatchEvent(new CustomEvent('todoListTimeChanged', { bubbles: true, composed: true, detail: { time: this.time } }));
-           }}">Later</button>
+					<button class$="btn-tab ${this.time === 1 ? 'active' : ''}" on-click="${() => {
+        this.time = 1
+        this.dispatchEvent(new CustomEvent('todoListTimeChanged', { bubbles: true, composed: true, detail: { time: this.time } }));
+      }}">Today</button>
+					<button class$="btn-tab ${this.time === 2 ? 'active' : ''}" on-click="${() => {
+        this.time = 2
+        this.dispatchEvent(new CustomEvent('todoListTimeChanged', { bubbles: true, composed: true, detail: { time: this.time } }));
+      }}">Later</button>
 				</div>
 				<div class="input-container">
           <textarea name="" 
-            value=${props.todoItem} 
+            value$=${props.todoItem} 
             on-keyup="${(e) => this._inputKeypress(e)}"
-            rows="2" placeholder="📝 Write a task"></textarea>
+            rows="2" placeholder="👉 Write a task"></textarea>
 					<button on-click="${() => this._onAddItem()}" class="btn-enter">Press Enter</button>
-					<div class="text-counter">0/300</div>
+					<div class="text-counter">${props.todoItem !== undefined ? props.todoItem.length: 0}/140</div>
 				</div>
 				<div class="error">😢 <small>Please write anything</small></div>
 			</div>

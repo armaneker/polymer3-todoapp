@@ -14,7 +14,6 @@ class TodoApp extends LitElement {
   constructor() {
     super();
     this.todoList = JSON.parse(window.localStorage.getItem('todo-list')) === null ? '' : JSON.parse(window.localStorage.getItem('todo-list'));
-    this.todoList = _.sortBy(this.todoList, ['done', 'id']);
     this.time = 1;
   }
 
@@ -25,7 +24,7 @@ class TodoApp extends LitElement {
       setTimeout(() => {
         this.time = e.detail.time;
         this.requestRender();
-      }, 200);
+      }, 75);
     });
     this.addEventListener('addItem', (e) => {
       this.todoList = e.detail.todoList;
