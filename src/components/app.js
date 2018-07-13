@@ -6,58 +6,56 @@ class TodoApp extends LitElement {
 
   static get properties() {
     return {
-      todoList: Object,
+      todoList: Array,
       time: Number
     }
   }
 
   constructor() {
     super();
-    this.todoList = {
-      list: JSON.parse(window.localStorage.getItem('todo-list')) === null ? '' : JSON.parse(window.localStorage.getItem('todo-list')),
-    }
+    this.todoList = JSON.parse(window.localStorage.getItem('todo-list')) === null ? '' : JSON.parse(window.localStorage.getItem('todo-list'));
+    this.todoList = _.sortBy(this.todoList, ['done', 'id']);
     this.time = 1;
   }
 
-  _firstRendered() { 
+  _firstRendered() {
     this.addEventListener('todoListTimeChanged', (e) => {
       this.time = this.time === 1 ? 3 : 4;
       this.requestRender();
       setTimeout(() => {
         this.time = e.detail.time;
         this.requestRender();
-      },200);
+      }, 200);
     });
-    this.addEventListener('todoListChanged', (e) => {
-      this.todoList.list = e.detail.todoList;
+    this.addEventListener('addItem', (e) => {
+      this.todoList = e.detail.todoList;
       this.requestRender();
     });
     this.addEventListener('todoItemDoneChange', (e) => {
       console.log('todoItemDoneChange');
-      let index = this.todoList.list.map(function(item) {return item.id}).indexOf(e.detail.item);
-      let list = _.clone(this.todoList.list);
+      let index = this.todoList.map(function (item) { return item.id }).indexOf(e.detail.item);
+      let list = this.todoList.slice();
       let item = Object.assign({}, list[index]);
       item.done = !item.done;
       list[index] = item;
-      this.todoList = {
-        list: list
-      };
-      window.localStorage.setItem('todo-list', JSON.stringify(this.todoList.list));
+      this.todoList = list;
+      this.todoList = _.sortBy(this.todoList, ['done', 'id']);
+      window.localStorage.setItem('todo-list', JSON.stringify(this.todoList));
     });
-    this.addEventListener('todoListRemove', (e) => {
+    this.addEventListener('removeItem', (e) => {
       console.log('todoListRemove');
-      let index = this.todoList.list.map(function (item) { return item.id }).indexOf(e.detail.item);
-      this.todoList.list.splice(index, 1);
-      this.todoList.list = _.clone(this.todoList.list);
+      let index = this.todoList.map(function (item) { return item.id }).indexOf(e.detail.item);
+      this.todoList.splice(index, 1);
+      this.todoList = _.clone(this.todoList);
       this.requestRender();
-      window.localStorage.setItem('todo-list', JSON.stringify(this.todoList.list));
+      window.localStorage.setItem('todo-list', JSON.stringify(this.todoList));
     });
   }
 
   _render({ todoList, time }) {
     return html`
       <add-item></add-item>
-      <list-items todoList="${this.todoList.list}" time="${this.time}"></list-items>
+      <list-items todoList="${this.todoList}" time="${this.time}"></list-items>
     `;
   }
 }

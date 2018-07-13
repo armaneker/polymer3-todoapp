@@ -38,7 +38,7 @@ class AddItem extends LitElement {
         done: false,
         time: this.time 
       });
-      this.dispatchEvent(new CustomEvent('todoListChanged', { bubbles: true, composed: true, detail: { todoList: storedTodoList } }));
+      this.dispatchEvent(new CustomEvent('addItem', { bubbles: true, composed: true, detail: { todoList: storedTodoList } }));
       this._clearInput();
     } else {
       storedTodoList = [
@@ -49,7 +49,7 @@ class AddItem extends LitElement {
           time: this.time
         }
       ];
-      this.dispatchEvent(new CustomEvent('todoListChanged', { bubbles: true, composed: true, detail: { todoList: storedTodoList } }));
+      this.dispatchEvent(new CustomEvent('addItem', { bubbles: true, composed: true, detail: { todoList: storedTodoList } }));
       this._clearInput();
     }
     window.localStorage.setItem('todo-list', JSON.stringify(storedTodoList));

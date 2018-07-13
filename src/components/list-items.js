@@ -7,9 +7,7 @@ class ListItems extends LitElement {
 
     static get properties() {
         return {
-            todoList: {
-                type: Array
-            },
+            todoList: Array,
             time: Number
         }
     }
