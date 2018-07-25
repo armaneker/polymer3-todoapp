@@ -22,8 +22,8 @@ class TodoItem extends LitElement {
         ${sharedStyle}
         <style>
             .list-item {
-                cursor:pointer;
                 display:flex;
+                flex-direction:column;
                 background:#fff;
                 border-radius:4px;
                 margin-bottom:0.5rem;
@@ -34,7 +34,6 @@ class TodoItem extends LitElement {
             }
             .list-item.done {
                 background: rgba(255,255,255,0.5);
-                text-decoration: line-through;
                 color:#004BC8;
             }
             .list-item:after {
@@ -63,6 +62,9 @@ class TodoItem extends LitElement {
             .list-item .check-action {
                 display:flex;
                 width:100%;
+                position: relative;
+                z-index:20;
+                cursor:pointer;
             }
             .list-item .delete {
                 padding:0.625rem 1rem;
@@ -87,6 +89,37 @@ class TodoItem extends LitElement {
             .list-item .delete:focus {
                 outline:none;
             }
+            .other-actions {
+                display:flex;
+                flex-direction: row;
+                border-top:1px solid rgba(0,0,0,0.05);
+                align-items:center;
+                margin:0 1rem;
+                position: relative;
+                z-index:15;
+            }
+            .other-actions .switch-board {
+                font-size:0.75rem;
+                color:rgba(0,0,0,0.25);
+                padding:0.5rem 0;
+                font-weight: 700;
+                text-transform: uppercase;
+                cursor:pointer;
+            }
+            .list-item.done .check-action {
+                text-decoration: line-through;
+            }
+            .list-item.done .other-actions {
+                text-decoration: none;
+            }
+            .other-actions .switch-board:hover {
+                color:rgba(0,0,0,0.5);
+            }
+            .list-item .other-actions .delete {
+                opacity:1;
+                padding:0.5rem 0 0.5rem 1rem;
+                cursor:pointer;
+            }
             @keyframes sheen {
               100% {
                 transform: rotateZ(60deg) translate(1em, -22em);
@@ -106,11 +139,14 @@ class TodoItem extends LitElement {
             }
         </style>
         <div class$="list-item ${todoItem !== undefined && todoItem.done ? 'done' : ''}">
-            <div on-click="${() => this._onDone(todoItem.id)}}" class="check-action">
+            <div class="check-action" on-click="${() => this._onDone(todoItem.id)}}">
                 <div class="check"><i class$="far ${todoItem !== undefined && todoItem.done ? 'fa-check-square' : 'fa-square'}"></i></div>
                 <div class="item">${todoItem !== undefined ? todoItem.item : ''}</div>
             </div>
-            <button class="delete" on-click="${() => this._onRemove(todoItem.id)}}"><i class="fas fa-times"></i></button>
+            <div class="other-actions">
+                <div class="switch-board"> <i class="fas fa-long-arrow-alt-right fa-lg"></i> Add to Later</div>
+                 <button class="delete" on-click="${() => this._onRemove(todoItem.id)}}"><i class="far fa-trash-alt"></i></button>
+            </div>
         </div>
     `;
     }
